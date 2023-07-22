@@ -1,0 +1,69 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'ch.fni.newnoteapp'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "ch.fni.newnoteapp"
+        minSdk 33
+        targetSdk 33
+        versionCode 1
+        versionName "0.0.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    // General
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion" // 1.6.1
+    // To be able to use the lifecycle components version 2.6.1 and to avoid a Duplicate Class
+    // Error, it's necessary to adjust the old jdk standard library dependencies:
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
+    // Database (RoomDB)
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion" // 2.5.2
+    implementation "androidx.room:room-rxjava3:$rootProject.roomVersion"
+    annotationProcessor "androidx.room:room-compiler:$rootProject.roomVersion"
+    testImplementation "androidx.room:room-testing:$rootProject.roomVersion" // Database - Test helpers
+    // Lifecycle  components
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycleVersion" // 2.6.1
+    implementation "androidx.lifecycle:lifecycle-livedata:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion"
+    // UI
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion" // 2.1.4
+    implementation "com.google.android.material:material:$rootProject.materialVersion" // 1.9.0
+    // Tests (JUnit4, Robolectric, Espresso)
+    testImplementation "junit:junit:$rootProject.junitVersion" // 4.13.2
+    testImplementation "org.robolectric:robolectric:$rootProject.roboelectricVersion" // 4.9
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.androixCoreTestingVersion" // 1.1.5
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion" // 2.2.0
+    androidTestImplementation ("androidx.test.espresso:espresso-core:$rootProject.androixEspressoVersion", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }) // 3.5.1
+}

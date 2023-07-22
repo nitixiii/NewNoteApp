@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NewNoteApp</string>
+    <string name="welcome">WELCOME</string>
+    <string name="add_note">Hinzufügen</string>
+    <string name="hint_note">Notiz...</string>
+    <string name="button_save">Speichern</string>
+    <string name="empty_not_saved">Nicht gespeichert, weil Notiz leer ist.</string>
+</resources>
